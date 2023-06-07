@@ -12,6 +12,7 @@ psycopg2-binary = "^2.9.6"
 Pillow = "^9.5.0"
 djangorestframework = "^3.14.0"
 django-cors-headers = "^4.0.0"
+drf-yasg = "^1.21.5"
 
 [tool.poetry.dev-dependencies]
 
