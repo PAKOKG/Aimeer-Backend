@@ -12,14 +12,16 @@ COPY pyproject.toml poetry.lock ./
 
 # install project dependencies
 RUN poetry config virtualenvs.create false && \
-    poetry add --no-root
+    poetry install --no-root --no-interaction --no-ansi
 
 # copy entrypoint.sh
 COPY ./entrypoint.sh /app/entrypoint.sh
+
+# modify entrypoint.sh permissions
 RUN chmod +x /app/entrypoint.sh
 
 # copy the rest of the app
 COPY . /app
 
 # run entrypoint.sh
-ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["/app/entrypoint.sh"]

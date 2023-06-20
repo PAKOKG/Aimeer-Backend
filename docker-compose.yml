@@ -1,20 +1,6 @@
 version: '3.10'
 
 services:
-  postgres_db:
-    image: postgres:12
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    ports:
-      - "5432:5432"
-    env_file:
-      - .env
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
-    container_name: postgres_db
-
   web:
     build: .
     volumes:
@@ -29,6 +15,20 @@ services:
     env_file:
       - .env/
     command: python manage.py runserver 0.0.0.0:8000
+
+  postgres_db:
+    image: postgres:12
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    container_name: postgres_db
 
   nginx:
     image: nginx:latest
